@@ -20,9 +20,12 @@ from torch.utils.data import DataLoader
 
 from w4c_dataloader import create_dataset
 
+import pathlib
 import sys
-from pathlib import Path
-sys.path.append(str(Path('.').absolute().parent))
+import os
+module_dir = str(pathlib.Path(os.getcwd()).parent)
+sys.path.append(module_dir)
+
 import config as cf
 from benchmarks.FeaturesSysUNet import FeaturesSysUNet as Model
 

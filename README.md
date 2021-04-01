@@ -131,6 +131,26 @@ We provide an introduction notebook in `utils/1. Onboarding.ipynb` where we cove
 
 Furthermore, you can find all explained methods in the notebook ready to use in the files `utils/data_utils.py` and `utils/context_variables.py`, so you can import them out of the box.
 
+The code assumes that if you download the regions for the core or transfer learning competition, they are located like follows:
+```
++-- data
+    +-- w4c-core-stage-1 
+        +-- R1
+        +-- R2
+        +-- R3
+    +-- w4c-transfer-learning-stage-1
+        +-- R4
+        +-- R5
+        +-- R6
+    +-- static
+        +-- Navigation_of_S_NWC_CT_MSG4_Europe-VISIR_20201106T120000Z.nc
+        +-- S_NWC_TOPO_MSG4_+000.0_Europe-VISIR.raw
+```
+Please, provide the path to the parent folder `data` as the argument `data_path` of the function `get_params(...)` in `config.py`. 
+
+Just in the same way, if you consider using the provided [static context variables](https://www.iarai.ac.at/weather4cast/forums/topic/weather4cast-2021-static-channels-common-files-for-any-competition/), provide the parent folder of the files `data/static` as the argument `static_data_path` of the function `get_params(...)`.
+
+
 ## Benchmarks
 
 ### Generate a submission
@@ -141,7 +161,7 @@ We provide a notebook (`2. Submission_UNet.ipynb`) where we show how to create a
 * A valid submission for the transfer-learning-competition (R4-6) using a single UNet trained on region R1
 * Use the ensamble of models trained in regions R1-3 to generate a valid submission for the transfer-learning-competition (R4-6) by averaging their predictions
 
-The weights for the UNets can be downloaded once registered to the competition [here](https://www.iarai.ac.at/weather4cast/forums/forum/competition/). The notebook uses an architecture and a [PyTorch Lightning](https://pytorch-lightning.readthedocs.io/en/latest/) class defined in `weather4cast/benchmarks/`, but it is not required to understand them when learning how to generate the submissions from a pre-trained model.
+The weights needed to generate such submission for the UNets can be downloaded once registered to the competition [here](https://www.iarai.ac.at/weather4cast/forums/forum/competition/). The notebook uses an architecture and a [PyTorch Lightning](https://pytorch-lightning.readthedocs.io/en/latest/) class defined in `weather4cast/benchmarks/`, but it is not required to understand them when learning how to generate the submissions from a pre-trained model.
 
 ### Train/evaluate a UNet
 We provide a script (`3-train-UNet-example.py`) with all necessary code to train a UNet model from scratch or fine tune from any of the provided checkpoints for `2. Submission_UNet.ipynb`. The same code with the flag `-m val` can be used to evaluate a model on the validation data split.
